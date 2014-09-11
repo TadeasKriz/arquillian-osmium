@@ -5,8 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>arquillian-iosium-tests</module>
-        <module>arquillian-iosium-container</module>
+        <module>arquillian-osmium-tests</module>
+        <module>arquillian-osmium-container</module>
+        <module>arquillian-osmium-lazy-deployment</module>
     </modules>
 
     <parent>
@@ -15,10 +16,51 @@
         <version>12</version>
     </parent>
 
-    <groupId>arquillian-iosium</groupId>
-    <artifactId>arquillian-iosium</artifactId>
+    <groupId>org.arquillian.osmium</groupId>
+    <artifactId>arquillian-osmium</artifactId>
     <version>1.0-SNAPSHOT</version>
 
 
+    <properties>
+        <arquillian.version>1.1.5.Final</arquillian.version>
+        <ios-driver.version>0.6.6-SNAPSHOT</ios-driver.version>
+        <rest-assured.version>2.3.2</rest-assured.version>
+        <spacelift.version>1.0.0.Alpha2</spacelift.version>
+        <drone.version>2.0.0.Alpha3-SNAPSHOT</drone.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.jboss.arquillian</groupId>
+                <artifactId>arquillian-bom</artifactId>
+                <version>${arquillian.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.uiautomation</groupId>
+                <artifactId>ios-server</artifactId>
+                <version>${ios-driver.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.jayway.restassured</groupId>
+                <artifactId>rest-assured</artifactId>
+                <version>${rest-assured.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.arquillian.spacelift</groupId>
+                <artifactId>arquillian-spacelift</artifactId>
+                <version>${spacelift.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jboss.arquillian.extension</groupId>
+                <artifactId>arquillian-drone-bom</artifactId>
+                <version>${drone.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
