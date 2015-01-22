@@ -1,2 +1,4 @@
 target/
 ios-driver.log
+xcuserdata/
+.workspace

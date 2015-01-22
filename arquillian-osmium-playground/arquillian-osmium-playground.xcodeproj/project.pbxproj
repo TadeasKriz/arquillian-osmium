@@ -7,150 +7,107 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8340AD7219B5E18200EA548C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8340AD7119B5E18200EA548C /* Foundation.framework */; };
-		8340AD7419B5E18200EA548C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8340AD7319B5E18200EA548C /* CoreGraphics.framework */; };
-		8340AD7619B5E18200EA548C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8340AD7519B5E18200EA548C /* UIKit.framework */; };
-		8340AD7C19B5E18200EA548C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8340AD7A19B5E18200EA548C /* InfoPlist.strings */; };
-		8340AD7E19B5E18200EA548C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8340AD7D19B5E18200EA548C /* main.m */; };
-		8340AD8219B5E18200EA548C /* ARQAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8340AD8119B5E18200EA548C /* ARQAppDelegate.m */; };
-		8340AD8519B5E18200EA548C /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8340AD8319B5E18200EA548C /* Main_iPhone.storyboard */; };
-		8340AD8819B5E18200EA548C /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8340AD8619B5E18200EA548C /* Main_iPad.storyboard */; };
-		8340AD8B19B5E18200EA548C /* ARQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8340AD8A19B5E18200EA548C /* ARQViewController.m */; };
-		8340AD8D19B5E18200EA548C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8340AD8C19B5E18200EA548C /* Images.xcassets */; };
-		8340AD9419B5E18200EA548C /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8340AD9319B5E18200EA548C /* XCTest.framework */; };
-		8340AD9519B5E18200EA548C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8340AD7119B5E18200EA548C /* Foundation.framework */; };
-		8340AD9619B5E18200EA548C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8340AD7519B5E18200EA548C /* UIKit.framework */; };
-		8340AD9E19B5E18200EA548C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8340AD9C19B5E18200EA548C /* InfoPlist.strings */; };
-		8340ADA019B5E18200EA548C /* arquillian_osmium_playgroundTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8340AD9F19B5E18200EA548C /* arquillian_osmium_playgroundTests.m */; };
+		83B5195D1A65664900A751DC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B5195C1A65664900A751DC /* AppDelegate.swift */; };
+		83B5195F1A65664900A751DC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B5195E1A65664900A751DC /* ViewController.swift */; };
+		83B519621A65664900A751DC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83B519601A65664900A751DC /* Main.storyboard */; };
+		83B519641A65664900A751DC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83B519631A65664900A751DC /* Images.xcassets */; };
+		83B519671A65664900A751DC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83B519651A65664900A751DC /* LaunchScreen.xib */; };
+		83B519731A65664900A751DC /* arquillian_osmium_playgroundTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83B519721A65664900A751DC /* arquillian_osmium_playgroundTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		8340AD9719B5E18200EA548C /* PBXContainerItemProxy */ = {
+		83B5196D1A65664900A751DC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 8340AD6619B5E18200EA548C /* Project object */;
+			containerPortal = 83B5194F1A65664900A751DC /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8340AD6D19B5E18200EA548C;
+			remoteGlobalIDString = 83B519561A65664900A751DC;
 			remoteInfo = "arquillian-osmium-playground";
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		8340AD6E19B5E18200EA548C /* arquillian-osmium-playground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "arquillian-osmium-playground.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8340AD7119B5E18200EA548C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		8340AD7319B5E18200EA548C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		8340AD7519B5E18200EA548C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		8340AD7919B5E18200EA548C /* arquillian-osmium-playground-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "arquillian-osmium-playground-Info.plist"; sourceTree = "<group>"; };
-		8340AD7B19B5E18200EA548C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		8340AD7D19B5E18200EA548C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		8340AD7F19B5E18200EA548C /* arquillian-osmium-playground-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "arquillian-osmium-playground-Prefix.pch"; sourceTree = "<group>"; };
-		8340AD8019B5E18200EA548C /* ARQAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARQAppDelegate.h; sourceTree = "<group>"; };
-		8340AD8119B5E18200EA548C /* ARQAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARQAppDelegate.m; sourceTree = "<group>"; };
-		8340AD8419B5E18200EA548C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
-		8340AD8719B5E18200EA548C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		8340AD8919B5E18200EA548C /* ARQViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARQViewController.h; sourceTree = "<group>"; };
-		8340AD8A19B5E18200EA548C /* ARQViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARQViewController.m; sourceTree = "<group>"; };
-		8340AD8C19B5E18200EA548C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		8340AD9219B5E18200EA548C /* arquillian-osmium-playgroundTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "arquillian-osmium-playgroundTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8340AD9319B5E18200EA548C /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		8340AD9B19B5E18200EA548C /* arquillian-osmium-playgroundTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "arquillian-osmium-playgroundTests-Info.plist"; sourceTree = "<group>"; };
-		8340AD9D19B5E18200EA548C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		8340AD9F19B5E18200EA548C /* arquillian_osmium_playgroundTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = arquillian_osmium_playgroundTests.m; sourceTree = "<group>"; };
+		83B519571A65664900A751DC /* arquillian-osmium-playground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "arquillian-osmium-playground.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		83B5195B1A65664900A751DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83B5195C1A65664900A751DC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		83B5195E1A65664900A751DC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		83B519611A65664900A751DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		83B519631A65664900A751DC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		83B519661A65664900A751DC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		83B5196C1A65664900A751DC /* arquillian-osmium-playgroundTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "arquillian-osmium-playgroundTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		83B519711A65664900A751DC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83B519721A65664900A751DC /* arquillian_osmium_playgroundTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = arquillian_osmium_playgroundTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8340AD6B19B5E18200EA548C /* Frameworks */ = {
+		83B519541A65664900A751DC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8340AD7419B5E18200EA548C /* CoreGraphics.framework in Frameworks */,
-				8340AD7619B5E18200EA548C /* UIKit.framework in Frameworks */,
-				8340AD7219B5E18200EA548C /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8340AD8F19B5E18200EA548C /* Frameworks */ = {
+		83B519691A65664900A751DC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8340AD9419B5E18200EA548C /* XCTest.framework in Frameworks */,
-				8340AD9619B5E18200EA548C /* UIKit.framework in Frameworks */,
-				8340AD9519B5E18200EA548C /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8340AD6519B5E18200EA548C = {
+		83B5194E1A65664900A751DC = {
 			isa = PBXGroup;
 			children = (
-				8340AD7719B5E18200EA548C /* arquillian-osmium-playground */,
-				8340AD9919B5E18200EA548C /* arquillian-osmium-playgroundTests */,
-				8340AD7019B5E18200EA548C /* Frameworks */,
-				8340AD6F19B5E18200EA548C /* Products */,
+				83B519591A65664900A751DC /* arquillian-osmium-playground */,
+				83B5196F1A65664900A751DC /* arquillian-osmium-playgroundTests */,
+				83B519581A65664900A751DC /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		8340AD6F19B5E18200EA548C /* Products */ = {
+		83B519581A65664900A751DC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8340AD6E19B5E18200EA548C /* arquillian-osmium-playground.app */,
-				8340AD9219B5E18200EA548C /* arquillian-osmium-playgroundTests.xctest */,
+				83B519571A65664900A751DC /* arquillian-osmium-playground.app */,
+				83B5196C1A65664900A751DC /* arquillian-osmium-playgroundTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		8340AD7019B5E18200EA548C /* Frameworks */ = {
+		83B519591A65664900A751DC /* arquillian-osmium-playground */ = {
 			isa = PBXGroup;
 			children = (
-				8340AD7119B5E18200EA548C /* Foundation.framework */,
-				8340AD7319B5E18200EA548C /* CoreGraphics.framework */,
-				8340AD7519B5E18200EA548C /* UIKit.framework */,
-				8340AD9319B5E18200EA548C /* XCTest.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		8340AD7719B5E18200EA548C /* arquillian-osmium-playground */ = {
-			isa = PBXGroup;
-			children = (
-				8340AD8019B5E18200EA548C /* ARQAppDelegate.h */,
-				8340AD8119B5E18200EA548C /* ARQAppDelegate.m */,
-				8340AD8319B5E18200EA548C /* Main_iPhone.storyboard */,
-				8340AD8619B5E18200EA548C /* Main_iPad.storyboard */,
-				8340AD8919B5E18200EA548C /* ARQViewController.h */,
-				8340AD8A19B5E18200EA548C /* ARQViewController.m */,
-				8340AD8C19B5E18200EA548C /* Images.xcassets */,
-				8340AD7819B5E18200EA548C /* Supporting Files */,
+				83B5195C1A65664900A751DC /* AppDelegate.swift */,
+				83B5195E1A65664900A751DC /* ViewController.swift */,
+				83B519601A65664900A751DC /* Main.storyboard */,
+				83B519631A65664900A751DC /* Images.xcassets */,
+				83B519651A65664900A751DC /* LaunchScreen.xib */,
+				83B5195A1A65664900A751DC /* Supporting Files */,
 			);
 			path = "arquillian-osmium-playground";
 			sourceTree = "<group>";
 		};
-		8340AD7819B5E18200EA548C /* Supporting Files */ = {
+		83B5195A1A65664900A751DC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8340AD7919B5E18200EA548C /* arquillian-osmium-playground-Info.plist */,
-				8340AD7A19B5E18200EA548C /* InfoPlist.strings */,
-				8340AD7D19B5E18200EA548C /* main.m */,
-				8340AD7F19B5E18200EA548C /* arquillian-osmium-playground-Prefix.pch */,
+				83B5195B1A65664900A751DC /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		8340AD9919B5E18200EA548C /* arquillian-osmium-playgroundTests */ = {
+		83B5196F1A65664900A751DC /* arquillian-osmium-playgroundTests */ = {
 			isa = PBXGroup;
 			children = (
-				8340AD9F19B5E18200EA548C /* arquillian_osmium_playgroundTests.m */,
-				8340AD9A19B5E18200EA548C /* Supporting Files */,
+				83B519721A65664900A751DC /* arquillian_osmium_playgroundTests.swift */,
+				83B519701A65664900A751DC /* Supporting Files */,
 			);
 			path = "arquillian-osmium-playgroundTests";
 			sourceTree = "<group>";
 		};
-		8340AD9A19B5E18200EA548C /* Supporting Files */ = {
+		83B519701A65664900A751DC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8340AD9B19B5E18200EA548C /* arquillian-osmium-playgroundTests-Info.plist */,
-				8340AD9C19B5E18200EA548C /* InfoPlist.strings */,
+				83B519711A65664900A751DC /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -158,13 +115,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8340AD6D19B5E18200EA548C /* arquillian-osmium-playground */ = {
+		83B519561A65664900A751DC /* arquillian-osmium-playground */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8340ADA319B5E18200EA548C /* Build configuration list for PBXNativeTarget "arquillian-osmium-playground" */;
+			buildConfigurationList = 83B519761A65664900A751DC /* Build configuration list for PBXNativeTarget "arquillian-osmium-playground" */;
 			buildPhases = (
-				8340AD6A19B5E18200EA548C /* Sources */,
-				8340AD6B19B5E18200EA548C /* Frameworks */,
-				8340AD6C19B5E18200EA548C /* Resources */,
+				83B519531A65664900A751DC /* Sources */,
+				83B519541A65664900A751DC /* Frameworks */,
+				83B519551A65664900A751DC /* Resources */,
 			);
 			buildRules = (
 			);
@@ -172,43 +129,46 @@
 			);
 			name = "arquillian-osmium-playground";
 			productName = "arquillian-osmium-playground";
-			productReference = 8340AD6E19B5E18200EA548C /* arquillian-osmium-playground.app */;
+			productReference = 83B519571A65664900A751DC /* arquillian-osmium-playground.app */;
 			productType = "com.apple.product-type.application";
 		};
-		8340AD9119B5E18200EA548C /* arquillian-osmium-playgroundTests */ = {
+		83B5196B1A65664900A751DC /* arquillian-osmium-playgroundTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8340ADA619B5E18200EA548C /* Build configuration list for PBXNativeTarget "arquillian-osmium-playgroundTests" */;
+			buildConfigurationList = 83B519791A65664900A751DC /* Build configuration list for PBXNativeTarget "arquillian-osmium-playgroundTests" */;
 			buildPhases = (
-				8340AD8E19B5E18200EA548C /* Sources */,
-				8340AD8F19B5E18200EA548C /* Frameworks */,
-				8340AD9019B5E18200EA548C /* Resources */,
+				83B519681A65664900A751DC /* Sources */,
+				83B519691A65664900A751DC /* Frameworks */,
+				83B5196A1A65664900A751DC /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				8340AD9819B5E18200EA548C /* PBXTargetDependency */,
+				83B5196E1A65664900A751DC /* PBXTargetDependency */,
 			);
 			name = "arquillian-osmium-playgroundTests";
 			productName = "arquillian-osmium-playgroundTests";
-			productReference = 8340AD9219B5E18200EA548C /* arquillian-osmium-playgroundTests.xctest */;
+			productReference = 83B5196C1A65664900A751DC /* arquillian-osmium-playgroundTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		8340AD6619B5E18200EA548C /* Project object */ = {
+		83B5194F1A65664900A751DC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = ARQ;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = Arquillian;
 				TargetAttributes = {
-					8340AD9119B5E18200EA548C = {
-						TestTargetID = 8340AD6D19B5E18200EA548C;
+					83B519561A65664900A751DC = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					83B5196B1A65664900A751DC = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 83B519561A65664900A751DC;
 					};
 				};
 			};
-			buildConfigurationList = 8340AD6919B5E18200EA548C /* Build configuration list for PBXProject "arquillian-osmium-playground" */;
+			buildConfigurationList = 83B519521A65664900A751DC /* Build configuration list for PBXProject "arquillian-osmium-playground" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -216,105 +176,86 @@
 				en,
 				Base,
 			);
-			mainGroup = 8340AD6519B5E18200EA548C;
-			productRefGroup = 8340AD6F19B5E18200EA548C /* Products */;
+			mainGroup = 83B5194E1A65664900A751DC;
+			productRefGroup = 83B519581A65664900A751DC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8340AD6D19B5E18200EA548C /* arquillian-osmium-playground */,
-				8340AD9119B5E18200EA548C /* arquillian-osmium-playgroundTests */,
+				83B519561A65664900A751DC /* arquillian-osmium-playground */,
+				83B5196B1A65664900A751DC /* arquillian-osmium-playgroundTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		8340AD6C19B5E18200EA548C /* Resources */ = {
+		83B519551A65664900A751DC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8340AD8819B5E18200EA548C /* Main_iPad.storyboard in Resources */,
-				8340AD8D19B5E18200EA548C /* Images.xcassets in Resources */,
-				8340AD8519B5E18200EA548C /* Main_iPhone.storyboard in Resources */,
-				8340AD7C19B5E18200EA548C /* InfoPlist.strings in Resources */,
+				83B519621A65664900A751DC /* Main.storyboard in Resources */,
+				83B519671A65664900A751DC /* LaunchScreen.xib in Resources */,
+				83B519641A65664900A751DC /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8340AD9019B5E18200EA548C /* Resources */ = {
+		83B5196A1A65664900A751DC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8340AD9E19B5E18200EA548C /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		8340AD6A19B5E18200EA548C /* Sources */ = {
+		83B519531A65664900A751DC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8340AD7E19B5E18200EA548C /* main.m in Sources */,
-				8340AD8219B5E18200EA548C /* ARQAppDelegate.m in Sources */,
-				8340AD8B19B5E18200EA548C /* ARQViewController.m in Sources */,
+				83B5195F1A65664900A751DC /* ViewController.swift in Sources */,
+				83B5195D1A65664900A751DC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		8340AD8E19B5E18200EA548C /* Sources */ = {
+		83B519681A65664900A751DC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8340ADA019B5E18200EA548C /* arquillian_osmium_playgroundTests.m in Sources */,
+				83B519731A65664900A751DC /* arquillian_osmium_playgroundTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		8340AD9819B5E18200EA548C /* PBXTargetDependency */ = {
+		83B5196E1A65664900A751DC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 8340AD6D19B5E18200EA548C /* arquillian-osmium-playground */;
-			targetProxy = 8340AD9719B5E18200EA548C /* PBXContainerItemProxy */;
+			target = 83B519561A65664900A751DC /* arquillian-osmium-playground */;
+			targetProxy = 83B5196D1A65664900A751DC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		8340AD7A19B5E18200EA548C /* InfoPlist.strings */ = {
+		83B519601A65664900A751DC /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				8340AD7B19B5E18200EA548C /* en */,
+				83B519611A65664900A751DC /* Base */,
 			);
-			name = InfoPlist.strings;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		8340AD8319B5E18200EA548C /* Main_iPhone.storyboard */ = {
+		83B519651A65664900A751DC /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				8340AD8419B5E18200EA548C /* Base */,
+				83B519661A65664900A751DC /* Base */,
 			);
-			name = Main_iPhone.storyboard;
-			sourceTree = "<group>";
-		};
-		8340AD8619B5E18200EA548C /* Main_iPad.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8340AD8719B5E18200EA548C /* Base */,
-			);
-			name = Main_iPad.storyboard;
-			sourceTree = "<group>";
-		};
-		8340AD9C19B5E18200EA548C /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8340AD9D19B5E18200EA548C /* en */,
-			);
-			name = InfoPlist.strings;
+			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		8340ADA119B5E18200EA548C /* Debug */ = {
+		83B519741A65664900A751DC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -329,9 +270,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -346,14 +289,15 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		8340ADA219B5E18200EA548C /* Release */ = {
+		83B519751A65664900A751DC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -368,10 +312,12 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -379,110 +325,100 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		8340ADA419B5E18200EA548C /* Debug */ = {
+		83B519771A65664900A751DC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "arquillian-osmium-playground/arquillian-osmium-playground-Prefix.pch";
-				INFOPLIST_FILE = "arquillian-osmium-playground/arquillian-osmium-playground-Info.plist";
+				INFOPLIST_FILE = "arquillian-osmium-playground/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
-		8340ADA519B5E18200EA548C /* Release */ = {
+		83B519781A65664900A751DC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "arquillian-osmium-playground/arquillian-osmium-playground-Prefix.pch";
-				INFOPLIST_FILE = "arquillian-osmium-playground/arquillian-osmium-playground-Info.plist";
+				INFOPLIST_FILE = "arquillian-osmium-playground/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
 		};
-		8340ADA719B5E18200EA548C /* Debug */ = {
+		83B5197A1A65664900A751DC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/arquillian-osmium-playground.app/arquillian-osmium-playground";
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "arquillian-osmium-playground/arquillian-osmium-playground-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "arquillian-osmium-playgroundTests/arquillian-osmium-playgroundTests-Info.plist";
+				INFOPLIST_FILE = "arquillian-osmium-playgroundTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/arquillian-osmium-playground.app/arquillian-osmium-playground";
 			};
 			name = Debug;
 		};
-		8340ADA819B5E18200EA548C /* Release */ = {
+		83B5197B1A65664900A751DC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/arquillian-osmium-playground.app/arquillian-osmium-playground";
+				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
 				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "arquillian-osmium-playground/arquillian-osmium-playground-Prefix.pch";
-				INFOPLIST_FILE = "arquillian-osmium-playgroundTests/arquillian-osmium-playgroundTests-Info.plist";
+				INFOPLIST_FILE = "arquillian-osmium-playgroundTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/arquillian-osmium-playground.app/arquillian-osmium-playground";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8340AD6919B5E18200EA548C /* Build configuration list for PBXProject "arquillian-osmium-playground" */ = {
+		83B519521A65664900A751DC /* Build configuration list for PBXProject "arquillian-osmium-playground" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8340ADA119B5E18200EA548C /* Debug */,
-				8340ADA219B5E18200EA548C /* Release */,
+				83B519741A65664900A751DC /* Debug */,
+				83B519751A65664900A751DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8340ADA319B5E18200EA548C /* Build configuration list for PBXNativeTarget "arquillian-osmium-playground" */ = {
+		83B519761A65664900A751DC /* Build configuration list for PBXNativeTarget "arquillian-osmium-playground" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8340ADA419B5E18200EA548C /* Debug */,
-				8340ADA519B5E18200EA548C /* Release */,
+				83B519771A65664900A751DC /* Debug */,
+				83B519781A65664900A751DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8340ADA619B5E18200EA548C /* Build configuration list for PBXNativeTarget "arquillian-osmium-playgroundTests" */ = {
+		83B519791A65664900A751DC /* Build configuration list for PBXNativeTarget "arquillian-osmium-playgroundTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8340ADA719B5E18200EA548C /* Debug */,
-				8340ADA819B5E18200EA548C /* Release */,
+				83B5197A1A65664900A751DC /* Debug */,
+				83B5197B1A65664900A751DC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 8340AD6619B5E18200EA548C /* Project object */;
+	rootObject = 83B5194F1A65664900A751DC /* Project object */;
 }

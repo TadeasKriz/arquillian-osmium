@@ -16,16 +16,18 @@
  */
 package org.arquillian.osmium;
 
-import org.uiautomation.ios.IOSCapabilities;
-import org.uiautomation.ios.client.uiamodels.impl.RemoteIOSDriver;
 
-import java.net.URL;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-public class IOSDriverImpl extends RemoteIOSDriver implements IOSDriver {
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-    public IOSDriverImpl(URL remoteAddress, IOSCapabilities desiredCapabilities) {
-        super(remoteAddress, desiredCapabilities);
-    }
-
+@Inherited
+@Documented
+@Retention(RUNTIME)
+@Target({ ElementType.FIELD, ElementType.PARAMETER})
+public @interface OsmiumResource {
 }
-

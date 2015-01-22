@@ -17,19 +17,27 @@
 package arquillian.osmium.test;
 
 import org.arquillian.osmium.util.IPABuilder;
+import org.arquillian.osmium.util.OsmiumBuilder;
+import org.arquillian.osmium.util.Settings;
 import org.jboss.shrinkwrap.api.Archive;
 
 import java.io.IOException;
 
 public class Deployments {
 
-    public static Archive<?> playgroundIpa() throws IOException {
-        return IPABuilder.prepare()
+    public static Archive<?> playgroundIpa(OsmiumBuilder builder) throws IOException {
+        return builder
                 .sourceDirectory("../arquillian-osmium-playground")
                 .projectName("arquillian-osmium-playground")
-                .developerName("Fill your developer name (can be found in Xcode)")
-                .provisioningProfile("Fill in path for your provisioning profile that can be used to deploy this archive")
-                .buildArchive();
+                .ipaArchive();
     }
+
+    public static Archive<?> playgroundApp(OsmiumBuilder builder) throws IOException {
+        return builder.sourceDirectory("../arquillian-osmium-playground")
+                .projectName("arquillian-osmium-playground")
+                .appArchive();
+    }
+
+
 
 }

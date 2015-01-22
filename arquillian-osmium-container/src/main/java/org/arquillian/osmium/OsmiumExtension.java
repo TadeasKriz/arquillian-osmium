@@ -42,6 +42,7 @@ public class OsmiumExtension implements LoadableExtension {
         // IOS Container
         extensionBuilder.service(DeployableContainer.class, IOSDeployableContainer.class);
 
+        extensionBuilder.observer(OsmiumLifecycleManager.class);
         extensionBuilder.observer(IOSDeploymentVerifier.class);
     }
 }

@@ -19,6 +19,8 @@ package org.arquillian.osmium;
 
 import org.arquillian.osmium.util.FileHelper;
 import org.arquillian.osmium.util.IOSServerConfigurationWithMonitorDirectorySetter;
+import org.arquillian.osmium.util.OsmiumDeployWrapper;
+import org.arquillian.osmium.util.WorkingDirectory;
 import org.arquillian.protocol.ios.impl.IOSProtocol;
 import org.arquillian.spacelift.execution.Tasks;
 import org.arquillian.spacelift.process.ProcessInteractionBuilder;
@@ -40,6 +42,7 @@ import org.jboss.shrinkwrap.api.exporter.ExplodedExporter;
 import org.jboss.shrinkwrap.api.exporter.ZipExporter;
 import org.jboss.shrinkwrap.descriptor.api.Descriptor;
 import org.uiautomation.ios.IOSServer;
+import org.uiautomation.ios.IOSServerConfiguration;
 
 import java.io.File;
 
@@ -53,32 +56,40 @@ public class IOSDeployableContainer implements DeployableContainer<IOSContainerC
     private InstanceProducer<IOSServer> server;
 
     @Inject
+    @SuiteScoped
+    private InstanceProducer<WorkingDirectory> workingDirectory;
+
+    @Inject
+    @SuiteScoped
+    private InstanceProducer<IOSContainerConfiguration> configuration;
+
+    @Inject
     private Instance<DroneContext> droneContextInstance;
 
     private IOSProtocol protocol;
-    private IOSContainerConfiguration configuration;
-    private File deploymentDirectory;
 
     @Override
-    public void setup(IOSContainerConfiguration iosContainerConfiguration) {
-        configuration = iosContainerConfiguration;
-        deploymentDirectory = new File(configuration.getWorkingDirectory() + "/deployments");
-        if (!deploymentDirectory.mkdirs()) {
-            throw new IllegalStateException("Could not create deployment directory at " + deploymentDirectory
-                    .getAbsolutePath());
-        }
+    public void setup(IOSContainerConfiguration configuration) {
+        this.configuration.set(configuration);
+        WorkingDirectory workingDirectory = new WorkingDirectory(configuration.getWorkingDirectory());
+        this.workingDirectory.set(workingDirectory);
+
+        File deploymentDirectory = workingDirectory.getDeploymentDirectory().asFile();
         protocol = new IOSProtocol();
 
         IOSServerConfigurationWithMonitorDirectorySetter serverConfiguration = new
                 IOSServerConfigurationWithMonitorDirectorySetter();
 
         serverConfiguration.setAppFolderToMonitorFile(deploymentDirectory);
-        serverConfiguration.setBeta(true);
-        serverConfiguration.setPort(4444);
+        serverConfiguration.setBeta(configuration.isBetaFeatures());
+        serverConfiguration.setPort(configuration.getPort());
 
         IOSServer iosServer = new IOSServer(serverConfiguration);
 
         server.set(iosServer);
+
+        OsmiumDeployWrapper wrapper = new OsmiumDeployWrapper(workingDirectory);
+
     }
 
     @Override
@@ -106,8 +117,9 @@ public class IOSDeployableContainer implements DeployableContainer<IOSContainerC
 
     @Override
     public ProtocolMetaData deploy(Archive<?> archive) throws DeploymentException {
+        WorkingDirectory workingDirectory = this.workingDirectory.get();
         ProtocolMetaData metadata = new ProtocolMetaData();
-        File tempAppFile = new File(deploymentDirectory, archive.getName());
+        File tempAppFile = new File(workingDirectory.getDeploymentDirectory().asFile(), archive.getName());
         boolean isSimulatorArchive = archive.getName().toLowerCase().endsWith(".app");
 
         archive.as(ZipExporter.class).exportTo(tempAppFile, true);
@@ -116,16 +128,16 @@ public class IOSDeployableContainer implements DeployableContainer<IOSContainerC
             File unzippedIPA = archive.as(ExplodedExporter.class).exportExploded(tempAppFile.getParentFile(),
                     tempAppFile.getName() + ".unzipped");
 
-            File appFile = FileHelper.findSingleFile(unzippedIPA, ".app$");
-            File iosDeployZip = new File(configuration.getWorkingDirectory(), "ios-deploy.zip");
-            File iosDeployDirectory = new File(configuration.getWorkingDirectory(), "ios-deploy-master");
+            File appFile = FileHelper.findSingleFile(unzippedIPA, "\\.app$");
+            File iosDeployZip = new File(workingDirectory.asFile(), "ios-deploy.zip");
+            File iosDeployDirectory = new File(workingDirectory.asFile(), "ios-deploy-master");
 
 
             Tasks.prepare(DownloadTool.class)
                     .from("https://github.com/phonegap/ios-deploy/archive/master.zip")
                     .to(iosDeployZip)
                     .then(UnzipTool.class)
-                    .toDir(configuration.getWorkingDirectory())
+                    .toDir(workingDirectory.asFile())
                     .execute().await();
             System.out.println("Downloaded and unzipped ios-deploy.");
 
@@ -137,7 +149,7 @@ public class IOSDeployableContainer implements DeployableContainer<IOSContainerC
                     .execute().await();
             Tasks.prepare(CommandTool.class)
                     .workingDir(iosDeployDirectory.getAbsolutePath())
-                    .programName("ios-deploy")
+                    .programName("./ios-deploy")
                     .parameters("-r", "-b", appFile.getAbsolutePath())
                     .interaction(new ProcessInteractionBuilder().when(".*").printToOut().build())
                     .execute().await();
@@ -151,17 +163,17 @@ public class IOSDeployableContainer implements DeployableContainer<IOSContainerC
     @Override
     public void undeploy(Archive<?> archive) throws DeploymentException {
         // FIXME can we uninstall the app first?
-        deploymentDirectory.delete();
+        workingDirectory.get().getDeploymentDirectory().asFile().delete();
     }
 
     @Override
     public void deploy(Descriptor descriptor) throws DeploymentException {
-
+        throw new UnsupportedOperationException("Deployment of descriptors is not supported!");
     }
 
     @Override
     public void undeploy(Descriptor descriptor) throws DeploymentException {
-
+        throw new UnsupportedOperationException("Deployment of descriptors is not supported!");
     }
 
     @Override

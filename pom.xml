@@ -25,12 +25,31 @@
         <arquillian.version>1.1.5.Final</arquillian.version>
         <ios-driver.version>0.6.6-SNAPSHOT</ios-driver.version>
         <rest-assured.version>2.3.2</rest-assured.version>
-        <spacelift.version>1.0.0.Alpha2</spacelift.version>
+        <spacelift.version>1.0.0.Alpha4</spacelift.version>
         <drone.version>2.0.0.Alpha3-SNAPSHOT</drone.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <!-- fixes NoMethodDefError in ios-driver -->
+            <dependency>
+                <groupId>com.googlecode.plist</groupId>
+                <artifactId>dd-plist</artifactId>
+                <version>1.8</version>
+            </dependency>
+            <dependency>
+                <groupId>com.intellij</groupId>
+                <artifactId>annotations</artifactId>
+                <version>12.0</version>
+                <classifier>excludingjsr305overlaps</classifier>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>jsr305</artifactId>
+                <version>3.0.0</version>
+                <optional>true</optional>
+            </dependency>
             <dependency>
                 <groupId>org.jboss.arquillian</groupId>
                 <artifactId>arquillian-bom</artifactId>
@@ -42,11 +61,6 @@
                 <groupId>org.uiautomation</groupId>
                 <artifactId>ios-server</artifactId>
                 <version>${ios-driver.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.jayway.restassured</groupId>
-                <artifactId>rest-assured</artifactId>
-                <version>${rest-assured.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.arquillian.spacelift</groupId>

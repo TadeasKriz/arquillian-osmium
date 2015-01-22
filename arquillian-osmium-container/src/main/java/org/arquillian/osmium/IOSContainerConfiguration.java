@@ -29,11 +29,21 @@ import java.util.logging.Logger;
 public class IOSContainerConfiguration implements ContainerConfiguration {
     private static final Logger logger = Logger.getLogger(IOSContainerConfiguration.class.getName());
 
+    private boolean betaFeatures = true;
+
     private String serverHost = "localhost";
 
     private int port = 4444;
 
     private String workingDirectory;
+
+    public boolean isBetaFeatures() {
+        return betaFeatures;
+    }
+
+    public void setBetaFeatures(boolean betaFeatures) {
+        this.betaFeatures = betaFeatures;
+    }
 
     public int getPort() {
         return port;

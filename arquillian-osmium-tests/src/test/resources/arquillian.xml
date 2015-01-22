@@ -17,15 +17,17 @@
     <container qualifier="ios" default="true">
         <configuration>
             <!--<property name="workingDirectory">/Users/tkriz/Developer/Sandbox/iosium-box</property>-->
-            <property name="beta">false</property>
+            <!--<property name="serverHost">localhost</property>-->
+            <!--<property name="port">4444</property>-->
+            <!--<property name="betaFeatures">false</property>-->
+            <!--<property name="deviceID">some-device-id</property>-->
         </configuration>
     </container>
 
     <extension qualifier="webdriver">
         <!--<property name="browser">ios</property>-->
         <property name="remoteAddress">http://localhost:4444/wd/hub</property>
-        <!--<property name="sdkVersion">8.0</property>-->
+        <property name="sdkVersion">8.0</property>
     </extension>
-
 
 </arquillian>

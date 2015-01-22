@@ -84,10 +84,15 @@ public class IOSDriverFactory implements
 
         DronePointContext<WebDriver> pointContext = droneContext.get().get(dronePoint);
 
+        System.out.println("Drone saved bundle name: " + pointContext.getMetadata(BundleNameKey.class));
         IOSCapabilities iosCapabilities = IOSCapabilities.iphone(pointContext.getMetadata(BundleNameKey.class));
         iosCapabilities.setCapability(IOSCapabilities.SIMULATOR, pointContext.getMetadata(UseSimulatorKey.class));
+
         if(capabilityMap.containsKey(IOSCapabilities.UI_SDK_VERSION)) {
             iosCapabilities.setSDKVersion((String) capabilityMap.get(IOSCapabilities.UI_SDK_VERSION));
+        }
+        if(capabilityMap.containsKey(IOSCapabilities.UUID)) {
+            iosCapabilities.setDeviceUUID((String) capabilityMap.get(IOSCapabilities.UUID));
         }
         return new IOSDriverImpl(remoteAddress, iosCapabilities);
     }

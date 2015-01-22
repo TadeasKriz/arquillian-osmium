@@ -16,7 +16,16 @@
  */
 package org.arquillian.osmium;
 
+import org.openqa.selenium.Rotatable;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.html5.LocationContext;
+import org.openqa.selenium.interactions.HasTouchScreen;
+import org.uiautomation.ios.client.uiamodels.impl.augmenter.Configurable;
+import org.uiautomation.ios.client.uiamodels.impl.augmenter.ElementTree;
+import org.uiautomation.ios.client.uiamodels.impl.augmenter.IOSSearchContext;
+import org.uiautomation.ios.client.uiamodels.impl.augmenter.IOSTouchScreen;
 
-public interface IOSDriver extends WebDriver {
+public interface IOSDriver extends WebDriver, TakesScreenshot, Rotatable, LocationContext, ElementTree,
+        IOSSearchContext, Configurable, HasTouchScreen, IOSTouchScreen {
 }

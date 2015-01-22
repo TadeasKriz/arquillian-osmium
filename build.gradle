@@ -1,0 +1,145 @@
+import org.arquillian.spacelift.gradle.*
+import org.arquillian.spacelift.gradle.android.*
+import org.arquillian.spacelift.execution.Tasks
+import org.arquillian.spacelift.gradle.maven.*
+import org.arquillian.spacelift.gradle.arquillian.*
+import org.arquillian.spacelift.process.impl.CommandTool
+import org.arquillian.spacelift.process.CommandBuilder
+
+defaultTasks 'assemble'
+
+ext {
+    defaultIOSDriverCommit = 'e41bc2470165c938a5ae2b20fcb75f53e126cfac'
+    defaultDroneCommit = '34aca2c68647bd307668dc8bef704de71818edff'
+
+    defaultDeveloperName = ''
+    defaultProvisioningProfile = ''
+}
+
+
+apply plugin: 'spacelift'
+
+spacelift {
+    workspace = new File(project.rootDir, ".workspace")
+    installationsDir = new File(workspace, "installations")
+
+    tools {
+        mvn {
+            command {
+                def m2 = System.getenv("M2")
+                def m2_home = System.getenv("M2_HOME")
+
+                if (m2 != null && !m2.isEmpty()) {
+                    return Tasks.prepare(CommandTool).command(new CommandBuilder("${m2}/mvn"))
+                } else if (m2_home != null && !m2_home.isEmpty()) {
+                    return Tasks.prepare(CommandTool).command(new CommandBuilder("${m2_home}/bin/mvn"))
+                } else {
+                    return Tasks.prepare(CommandTool).command(new CommandBuilder("mvn"))
+                }
+            }
+        }
+    }
+
+    profiles {
+        'default' {
+            enabledInstallations 'iosDriver', 'drone', 'osmium'
+            tests 'osmium'
+        }
+    }
+
+    installations {
+        iosDriver {
+            product 'ios-driver'
+            version '0.6.6-SNAPSHOT'
+            remoteUrl 'http://google.com/'
+            fileName 'delete.me'
+            home 'ios-driver'
+            autoExtract false
+            postActions {
+                home.deleteDir()
+
+                Tasks.prepare(CommandTool)
+                        .programName('git')
+                        .parameters('clone', 'https://github.com/ios-driver/ios-driver.git', home.absolutePath)
+                        .execute().await()
+
+                Tasks.prepare(CommandTool)
+                        .programName('git')
+                        .workingDir(home.absolutePath)
+                        .parameters('checkout', project.iOSDriverCommit)
+                        .execute().await()
+
+                Tasks.prepare(CommandTool)
+                        .programName('git')
+                        .workingDir(home.absolutePath)
+                        .parameters('submodule', 'update', '--init', '--recursive')
+                        .execute().await()
+
+                Tasks.prepare(MavenExecutor)
+                        .pom("${home.absolutePath}/pom.xml")
+                        .goals('clean', 'install')
+                        .property('maven.test.skip=true')
+                        .execute().await()
+            }
+        }
+        drone {
+            product 'drone'
+            version '2.0.0.Alpha3-SNAPSHOT'
+            remoteUrl { "https://github.com/arquillian/arquillian-extension-drone/archive/${project.droneCommit}.zip" }
+            fileName 'arquillian-extension-drone.zip'
+            home 'arquillian-extension-drone'
+            extractMapper {
+                toDir(home)
+                cutdirs()
+            }
+            postActions {
+                Tasks.prepare(MavenExecutor)
+                        .pom("${home.absolutePath}/pom.xml")
+                        .goals('clean', 'install')
+                        .property('maven.test.skip=true')
+                        .execute().await()
+            }
+        }
+        osmium {
+            product 'osmium'
+            version '1.0-SNAPSHOT'
+            postActions {
+                Tasks.prepare(MavenExecutor)
+                        .pom("pom.xml")
+                        .goals('clean', 'install')
+                        .property('maven.test.skip=true')
+                        .execute().await()
+            }
+        }
+    }
+
+    tests {
+        osmium {
+            execute {
+                Tasks.prepare(MavenExecutor)
+                        .pom("pom.xml")
+                        .goals('clean', 'test')
+                        .property("osmium.developerName=${project.developerName}")
+                        .property("osmium.provisioningProfile=${project.provisioningProfile}")
+                        .property("arquillian.debug=true")
+                        .execute().await()
+            }
+        }
+    }
+
+}
+
+
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            name 'jboss-staging-repository-group'
+            url 'https://repository.jboss.org/nexus/content/groups/staging'
+        }
+    }
+
+    dependencies {
+        classpath 'org.arquillian.spacelift.gradle:arquillian-spacelift-gradle:1.0.0-alpha-6'
+    }
+}

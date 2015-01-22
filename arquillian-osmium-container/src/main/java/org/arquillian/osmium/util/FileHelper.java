@@ -17,6 +17,9 @@
  */
 package org.arquillian.osmium.util;
 
+import org.intellij.lang.annotations.RegExp;
+
+import javax.annotation.Nonnull;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.Closeable;
@@ -59,7 +62,7 @@ public class FileHelper {
         throw new IllegalStateException("Could not create temp directory. No of retries: " + TEMP_CREATION_TRIES);
     }
 
-    public static void copy(File source, File target) throws IOException {
+    public static void copy(@Nonnull File source, @Nonnull File target) throws IOException {
         if (!source.exists()) {
             throw new IllegalArgumentException("Source file does not exist! " + source.getAbsolutePath());
         }
@@ -70,7 +73,7 @@ public class FileHelper {
         }
     }
 
-    private static void copyDirectory(File source, File target) throws IOException {
+    private static void copyDirectory(@Nonnull File source, @Nonnull File target) throws IOException {
         if (!target.exists()) {
             if (!target.mkdir()) {
                 throw new IllegalStateException("Could not create target directory at " + target.getAbsolutePath());
@@ -89,7 +92,7 @@ public class FileHelper {
         }
     }
 
-    private static void copyFile(File source, File target) throws IOException {
+    private static void copyFile(@Nonnull File source, @Nonnull File target) throws IOException {
         InputStream inputStream = null;
         OutputStream outputStream = null;
         try {
@@ -104,7 +107,9 @@ public class FileHelper {
             LOGGER.log(Level.FINE, "Copied file {0}", target.getAbsolutePath());
         } finally {
             // We do not care about the possible exception while closing
+            //noinspection ThrowableResultOfMethodCallIgnored
             safeClose(inputStream);
+            //noinspection ThrowableResultOfMethodCallIgnored
             safeClose(outputStream);
         }
     }
@@ -122,20 +127,20 @@ public class FileHelper {
         }
     }
 
-    public static void replaceAllInFile(File target, String regex, String replacement) throws IOException {
+    public static void replaceAllInFile(@Nonnull File target, @RegExp String regex, String replacement) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(target));
         List<String> originalText = new ArrayList<String>();
         String line;
-        while((line = reader.readLine()) != null) {
+        while ((line = reader.readLine()) != null) {
             originalText.add(line);
         }
         reader.close();
 
-        BufferedWriter writer =  new BufferedWriter(new FileWriter(target));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(target));
         for (int i = 0; i < originalText.size(); i++) {
             String originalLine = originalText.get(i);
             String replacedLine = originalLine.replaceAll(regex, replacement);
-            if(i > 0) {
+            if (i > 0) {
                 writer.newLine();
             }
             writer.write(replacedLine);
@@ -143,42 +148,45 @@ public class FileHelper {
         writer.close();
     }
 
-    public static void exportResource(Class<?> cls, String resource, File target) throws IOException {
+    public static void exportResource(@Nonnull Class<?> cls, @Nonnull String resource, @Nonnull File target)
+            throws IOException {
         InputStream inputStream = cls.getResourceAsStream(resource);
         OutputStream outputStream = null;
         byte[] buffer = new byte[4096];
         int read;
         try {
             outputStream = new FileOutputStream(target);
-            while((read = inputStream.read(buffer)) != -1) {
+            while ((read = inputStream.read(buffer)) != -1) {
                 outputStream.write(buffer, 0, read);
             }
         } finally {
+            //noinspection ThrowableResultOfMethodCallIgnored
             safeClose(inputStream);
+            //noinspection ThrowableResultOfMethodCallIgnored
             safeClose(outputStream);
         }
     }
 
-    public static List<File> findFiles(File directory, String regex) {
+    public static List<File> findFiles(@Nonnull File directory, @RegExp String regex) {
         Pattern pattern = Pattern.compile(regex);
         return findFiles(directory, pattern);
     }
 
-    public static List<File> findFiles(File directory, Pattern pattern) {
+    public static List<File> findFiles(@Nonnull File directory, Pattern pattern) {
         List<File> result = new ArrayList<File>();
-        if(!directory.isDirectory()) {
+        if (!directory.isDirectory()) {
             throw new IllegalStateException("Target was not a directory! " + directory.getAbsolutePath());
         }
 
         File[] files = directory.listFiles();
-        if(files != null) {
+        if (files != null) {
             for (File file : files) {
                 Matcher matcher = pattern.matcher(file.getName());
-                if(matcher.find()) {
+                if (matcher.find()) {
                     result.add(file);
                 }
 
-                if(file.isDirectory()) {
+                if (file.isDirectory()) {
                     result.addAll(findFiles(file, pattern));
                 }
             }
@@ -186,33 +194,34 @@ public class FileHelper {
         return result;
     }
 
-    public static File findSingleFile(File directory, String regex) {
+    public static File findSingleFile(@Nonnull File directory, @RegExp String regex) {
         List<File> result = findFiles(directory, regex);
-        if(result.size() != 1) {
+        if (result.size() != 1) {
             throw new IllegalStateException("Number of matched files should be 1, was " + result.size());
         }
         return result.iterator().next();
     }
 
-    public static void appendTextToFile(File target, String text) throws IOException {
+    public static void appendTextToFile(@Nonnull File target, String text) throws IOException {
         FileWriter writer = null;
         try {
             writer = new FileWriter(target, true);
             writer.append(text);
         } finally {
+            //noinspection ThrowableResultOfMethodCallIgnored
             safeClose(writer);
         }
 
     }
 
-    public static String readResource(Class<?> cls, String resource) throws IOException {
+    public static String readResource(@Nonnull Class<?> cls, @Nonnull String resource) throws IOException {
         StringBuilder builder = new StringBuilder();
         InputStreamReader reader = null;
         try {
             reader = new InputStreamReader(cls.getResourceAsStream(resource), "UTF-8");
             char[] buffer = new char[1024];
             int read;
-            while((read = reader.read(buffer)) != -1) {
+            while ((read = reader.read(buffer)) != -1) {
                 builder.append(buffer, 0, read);
             }
             return builder.toString();

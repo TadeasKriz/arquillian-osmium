@@ -18,6 +18,8 @@
 package arquillian.osmium.test;
 
 import org.arquillian.osmium.IOSDriver;
+import org.arquillian.osmium.OsmiumResource;
+import org.arquillian.osmium.util.OsmiumBuilder;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.OperateOnDeployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
@@ -25,22 +27,18 @@ import org.jboss.arquillian.drone.api.annotation.Drone;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.Archive;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.Augmenter;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.CountDownLatch;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.CoreMatchers.nullValue;
-import static org.hamcrest.Matchers.not;
-import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
@@ -51,6 +49,8 @@ import static org.junit.Assert.assertThat;
 @RunAsClient
 public class IOSDeployableContainerTest {
 
+    @OsmiumResource
+    static OsmiumBuilder builder;
 
     @Drone
     @OperateOnDeployment("ios-app")
@@ -58,7 +58,7 @@ public class IOSDeployableContainerTest {
 
     @Deployment(testable = false, name = "ios-app")
     public static Archive<?> createDeployment() throws IOException {
-        return Deployments.playgroundIpa();
+        return Deployments.playgroundIpa(builder);
     }
 
     @After
@@ -85,6 +85,8 @@ public class IOSDeployableContainerTest {
         WebElement switchElement = driver.findElement(By.id("switch"));
         switchElement.click();
         textField.sendKeys("Bye Osmium\n");
+
+        File screenshot = driver.getScreenshotAs(OutputType.FILE);
 
     }
 

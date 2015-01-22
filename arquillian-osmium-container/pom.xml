@@ -12,6 +12,15 @@
     <artifactId>arquillian-osmium-container</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>com.intellij</groupId>
+            <artifactId>annotations</artifactId>
+            <classifier>excludingjsr305overlaps</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>org.jboss.arquillian.container</groupId>
@@ -42,11 +51,6 @@
                     <artifactId>xml-apis</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>com.jayway.restassured</groupId>
-            <artifactId>rest-assured</artifactId>
         </dependency>
 
         <dependency>

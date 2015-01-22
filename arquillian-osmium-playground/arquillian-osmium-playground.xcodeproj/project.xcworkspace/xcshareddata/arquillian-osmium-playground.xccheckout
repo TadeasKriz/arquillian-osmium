@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>21610AF0-03F6-41E3-ACAD-FF787FAAC774</string>
+	<string>EDD2B8E7-12BF-4522-B957-89A42E35BD14</string>
 	<key>IDESourceControlProjectName</key>
 	<string>arquillian-osmium-playground</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>291E94F8-2EDC-4C95-A4D2-28A94AEE4308</key>
+		<key>4ED74CAC8A1BFCD4C0A9B76218C8EF43065DA35B</key>
 		<string>https://github.com/TadeasKriz/arquillian-iosium</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>arquillian-osmium-playground/arquillian-osmium-playground.xcodeproj/project.xcworkspace</string>
+	<string>arquillian-osmium-playground/arquillian-osmium-playground.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>291E94F8-2EDC-4C95-A4D2-28A94AEE4308</key>
+		<key>4ED74CAC8A1BFCD4C0A9B76218C8EF43065DA35B</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/TadeasKriz/arquillian-iosium</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>291E94F8-2EDC-4C95-A4D2-28A94AEE4308</string>
+	<string>4ED74CAC8A1BFCD4C0A9B76218C8EF43065DA35B</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>291E94F8-2EDC-4C95-A4D2-28A94AEE4308</string>
+			<string>4ED74CAC8A1BFCD4C0A9B76218C8EF43065DA35B</string>
 			<key>IDESourceControlWCCName</key>
 			<string>arquillian-iosium</string>
 		</dict>

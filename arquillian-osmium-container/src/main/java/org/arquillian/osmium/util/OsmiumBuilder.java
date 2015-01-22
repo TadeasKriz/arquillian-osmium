@@ -17,19 +17,18 @@
 package org.arquillian.osmium.util;
 
 import org.arquillian.spacelift.execution.Tasks;
-import org.arquillian.spacelift.process.ProcessInteraction;
 import org.arquillian.spacelift.process.ProcessInteractionBuilder;
 import org.arquillian.spacelift.process.impl.CommandTool;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
+import org.jboss.shrinkwrap.api.importer.ExplodedImporter;
 import org.jboss.shrinkwrap.api.importer.ZipImporter;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
 
 import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
-public class IPABuilder {
+public class OsmiumBuilder {
 
     private File sourceDirectory;
     private String projectName;
@@ -40,23 +39,28 @@ public class IPABuilder {
     private WorkingDirectory workingDirectory;
     private String developerName = Settings.DEVELOPER_NAME.getValue();
     private File provisioningProfile = Settings.PROVISIONING_PROFILE.getValue();
+    private PrefferedOutput prefferedOutput = PrefferedOutput.APP;
 
     private OnBeforeBuildListener onBeforeBuildListener;
 
-    public static IPABuilder prepare() {
-        return new IPABuilder();
+    public OsmiumBuilder() {
+
+    }
+
+    public static OsmiumBuilder prepare() {
+        return new OsmiumBuilder();
     }
 
     public File sourceDirectory() {
         return sourceDirectory;
     }
 
-    public IPABuilder sourceDirectory(File sourceDirectory) {
+    public OsmiumBuilder sourceDirectory(File sourceDirectory) {
         this.sourceDirectory = sourceDirectory;
         return this;
     }
 
-    public IPABuilder sourceDirectory(String sourceDirectoryPath) {
+    public OsmiumBuilder sourceDirectory(String sourceDirectoryPath) {
         return sourceDirectory(new File(sourceDirectoryPath));
     }
 
@@ -64,7 +68,7 @@ public class IPABuilder {
         return projectName;
     }
 
-    public IPABuilder projectName(String projectName) {
+    public OsmiumBuilder projectName(String projectName) {
         this.projectName = projectName;
         return this;
     }
@@ -73,7 +77,7 @@ public class IPABuilder {
         return targetSdkVersion;
     }
 
-    public IPABuilder targetSdkVersion(String targetSdkVersion) {
+    public OsmiumBuilder targetSdkVersion(String targetSdkVersion) {
         this.targetSdkVersion = targetSdkVersion;
         return this;
     }
@@ -82,7 +86,7 @@ public class IPABuilder {
         return targetSdkName;
     }
 
-    public IPABuilder targetSdkName(String targetSdkName) {
+    public OsmiumBuilder targetSdkName(String targetSdkName) {
         this.targetSdkName = targetSdkName;
         return this;
     }
@@ -91,7 +95,7 @@ public class IPABuilder {
         return configurationName;
     }
 
-    public IPABuilder configurationName(String configurationName) {
+    public OsmiumBuilder configurationName(String configurationName) {
         this.configurationName = configurationName;
         return this;
     }
@@ -100,7 +104,7 @@ public class IPABuilder {
         return schemeName;
     }
 
-    public IPABuilder schemeName(String schemeName) {
+    public OsmiumBuilder schemeName(String schemeName) {
         this.schemeName = schemeName;
         return this;
     }
@@ -109,12 +113,12 @@ public class IPABuilder {
         return workingDirectory;
     }
 
-    public IPABuilder workingDirectory(WorkingDirectory workingDirectory) {
+    public OsmiumBuilder workingDirectory(WorkingDirectory workingDirectory) {
         this.workingDirectory = workingDirectory;
         return this;
     }
 
-    public IPABuilder workingDirectory(String absolutePath) {
+    public OsmiumBuilder workingDirectory(String absolutePath) {
         this.workingDirectory = new WorkingDirectory(absolutePath);
         return this;
     }
@@ -122,7 +126,7 @@ public class IPABuilder {
         return developerName;
     }
 
-    public IPABuilder developerName(String developerName) {
+    public OsmiumBuilder developerName(String developerName) {
         this.developerName = developerName;
         return this;
     }
@@ -131,12 +135,12 @@ public class IPABuilder {
         return provisioningProfile;
     }
 
-    public IPABuilder provisioningProfile(@Nonnull File provisioningProfile) {
+    public OsmiumBuilder provisioningProfile(@Nonnull File provisioningProfile) {
         this.provisioningProfile = provisioningProfile;
         return this;
     }
 
-    public IPABuilder provisioningProfile(@Nonnull String provisioningProfilePath) {
+    public OsmiumBuilder provisioningProfile(@Nonnull String provisioningProfilePath) {
         return provisioningProfile(new File(provisioningProfilePath));
     }
 
@@ -144,12 +148,20 @@ public class IPABuilder {
         return onBeforeBuildListener;
     }
 
-    public IPABuilder onBeforeBuildListener(OnBeforeBuildListener onBeforeBuildListener) {
+    public OsmiumBuilder onBeforeBuildListener(OnBeforeBuildListener onBeforeBuildListener) {
         this.onBeforeBuildListener = onBeforeBuildListener;
         return this;
     }
 
-    public File build() throws IOException {
+    /*public OsmiumBuilder(OsmiumBuilderConfiguration configuration) {
+        configure(configuration);
+    }*/
+
+    /*public OsmiumBuilder configure(OsmiumBuilderConfiguration configuration) {
+
+    }*/
+
+    public File buildAPP() throws IOException {
         if(schemeName == null) {
             schemeName = projectName;
         }
@@ -159,9 +171,6 @@ public class IPABuilder {
 
         File sourceDirectory = workingDirectory.prepareSubdirectory("source");
         File buildDirectory = workingDirectory.prepareSubdirectory("build");
-
-        String workingDirectoryPath = sourceDirectory.getAbsolutePath();
-        String buildDirectoryPath = buildDirectory.getAbsolutePath();
 
         FileHelper.copy(this.sourceDirectory, sourceDirectory);
 
@@ -178,48 +187,75 @@ public class IPABuilder {
         }
 
         Tasks.prepare(CommandTool.class)
-                .workingDir(workingDirectoryPath)
+                .workingDirectory(sourceDirectory)
                 .programName("xcodebuild")
                 .parameter("clean")
                 .execute().await();
 
         Tasks.prepare(CommandTool.class)
-                .workingDir(workingDirectoryPath)
+                .workingDirectory(sourceDirectory)
                 .programName("xcodebuild")
                 .addEnvironment()
                 .parameters("-target", projectName)
                 .parameters("-sdk", targetSdkName)
                 .parameters("-configuration", configurationName)
-                .parameters("-derivedDataPath", buildDirectoryPath)
+                .parameters("-derivedDataPath", buildDirectory.getAbsolutePath())
                 .parameters("-scheme", schemeName)
                 .parameters("CODE_SIGN_RESOURCE_RULES_PATH=$(SDKROOT)/ResourceRules.plist")
-                .interaction(new ProcessInteractionBuilder().when(".*").printToOut().outputPrefix("(xcodebuild) "))
+                //.interaction(new ProcessInteractionBuilder().when(".*").printToOut().outputPrefix("(xcodebuild) "))
                 .execute().await();
 
+        return new File(buildDirectory, "Build/Products/" + configurationName + "-" + targetSdkName + "/" + projectName + ".app");
+    }
+
+    public File buildIPA() throws IOException {
+        File app = buildAPP();
+
+        File sourceDirectory = workingDirectory.prepareSubdirectory("source");
+
         Tasks.prepare(CommandTool.class)
-                .workingDir(workingDirectoryPath)
+                .workingDirectory(sourceDirectory)
                 .programName("xcrun")
                 .parameters("-sdk", targetSdkName)
                 .parameters("PackageApplication")
-                .parameters("-v", buildDirectory + "/Build/Products/" + configurationName + "-" + targetSdkName + "/" + projectName + ".app")
+                .parameters("-v", app.getAbsolutePath())
                 .parameters("-o", workingDirectory.asFile() + "/" + projectName + ".ipa")
                 .parameters("--sign", developerName)
                 .parameters("--embed", provisioningProfile.getAbsolutePath())
-                .interaction(new ProcessInteractionBuilder().when(".*").printToOut().outputPrefix("(xcrun) "))
+                //.interaction(new ProcessInteractionBuilder().when(".*").printToOut().outputPrefix("(xcrun) "))
                 .execute().await();
 
         return new File(workingDirectory.asFile(), projectName + ".ipa");
     }
 
-    public JavaArchive buildArchive() throws IOException {
+    public JavaArchive appArchive() throws IOException {
+        File app = buildAPP();
+
+        return ShrinkWrap.create(ExplodedImporter.class, projectName + ".app")
+                .importDirectory(app)
+                .as(JavaArchive.class);
+    }
+
+    public JavaArchive ipaArchive() throws IOException {
+        File ipa = buildIPA();
+
         return ShrinkWrap.create(ZipImporter.class, projectName + ".ipa")
-                .importFrom(build())
+                .importFrom(ipa)
                 .as(JavaArchive.class);
     }
 
     public interface OnBeforeBuildListener {
 
-        void onBeforeBuild(IPABuilder builder, File workingDirectory, File buildDirectory) throws IOException;
+        void onBeforeBuild(OsmiumBuilder builder, File workingDirectory, File buildDirectory) throws IOException;
 
     }
+
+    public static class OsmiumBuilderConfiguration {
+
+    }
+
+    public enum PrefferedOutput {
+        IPA, APP
+    }
+
 }

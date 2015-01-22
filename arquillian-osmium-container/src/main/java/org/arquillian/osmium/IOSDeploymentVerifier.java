@@ -16,8 +16,7 @@
  */
 package org.arquillian.osmium;
 
-import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.response.Response;
+import org.arquillian.osmium.util.NetworkHelper;
 import org.jboss.arquillian.container.spi.client.deployment.DeploymentDescription;
 import org.jboss.arquillian.container.spi.client.protocol.metadata.ProtocolMetaData;
 import org.jboss.arquillian.container.spi.context.annotation.DeploymentScoped;
@@ -32,9 +31,9 @@ import org.jboss.arquillian.drone.spi.filter.DeploymentFilter;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONTokener;
 import org.openqa.selenium.WebDriver;
 
+import java.io.IOException;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,7 +51,7 @@ public class IOSDeploymentVerifier {
     private Instance<DroneContext> droneContextInstance;
 
     public void afterDeployment(@Observes AfterDeploy event) {
-        if(event.getDeployableContainer() instanceof IOSDeployableContainer) {
+        if (event.getDeployableContainer() instanceof IOSDeployableContainer) {
             ProtocolMetaData metaData = protocolMetaDataInstance.get();
 
             Collection<IOSContainerContext> contexts = metaData.getContexts(IOSContainerContext.class);
@@ -90,29 +89,21 @@ public class IOSDeploymentVerifier {
 
         DroneContext droneContext = droneContextInstance.get();
 
-        FilterableResult<WebDriver> result = droneContext.find(WebDriver.class).filter(new DeploymentFilter(deployment.getName()));
+        FilterableResult<WebDriver> result = droneContext.find(WebDriver.class).filter(new DeploymentFilter
+                (deployment.getName()));
 
         for (DronePoint<WebDriver> dronePoint : result) {
             droneContext.get(dronePoint).setMetadata(BundleNameKey.class, bundleName);
             droneContext.get(dronePoint).setMetadata(UseSimulatorKey.class, context.isSimulatorArchive());
         }
-
     }
 
     private String getBundleName(String packageLocation) {
-        Response response = RestAssured
-                .given()
-                .baseUri("http://localhost:4444")
-                .basePath("/")
-                .get("/wd/hub/status");
-
-        // System.out.println(response.body().asString());
-
-        JSONTokener tokener = new JSONTokener(response.body().asString());
-
         JSONObject responseJson;
         try {
-            responseJson = new JSONObject(tokener);
+            responseJson = NetworkHelper.getJSON("http://localhost:4444/wd/hub/status");
+        } catch (IOException e) {
+            throw new RuntimeException("Could not get response from /wd/hub/status!", e);
         } catch (JSONException e) {
             throw new RuntimeException("Response from /wd/hub/status was malformed!", e);
         }
@@ -130,7 +121,7 @@ public class IOSDeploymentVerifier {
 
             String applicationPath = supportedApp.optString("applicationPath");
             if (applicationPath.startsWith(packageLocation)) {
-                return supportedApp.optString("CFBundleDisplayName");
+                return supportedApp.optString("CFBundleName");
             }
         }
 
