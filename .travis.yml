@@ -1,0 +1,8 @@
+language: objective-c
+osx_image: xcode611
+jdk:
+    - oraclejdk7
+install:
+    - ./gradlew assemble -Pwildfly8
+script:
+    - ./gradlew test -Pwildfly8
