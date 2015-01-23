@@ -3,6 +3,6 @@ osx_image: xcode611
 jdk:
     - oraclejdk7
 install:
-    - ./gradlew assemble -Pwildfly8
+    - ./gradlew assemble
 script:
-    - ./gradlew test -Pwildfly8
+    - ./gradlew test

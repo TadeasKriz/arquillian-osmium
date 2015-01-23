@@ -30,11 +30,11 @@ spacelift {
                 def m2_home = System.getenv("M2_HOME")
 
                 if (m2 != null && !m2.isEmpty()) {
-                    return Tasks.prepare(CommandTool).command(new CommandBuilder("${m2}/mvn"))
+                    return new CommandBuilder("${m2}/mvn")
                 } else if (m2_home != null && !m2_home.isEmpty()) {
-                    return Tasks.prepare(CommandTool).command(new CommandBuilder("${m2_home}/bin/mvn"))
+                    return new CommandBuilder("${m2_home}/bin/mvn")
                 } else {
-                    return Tasks.prepare(CommandTool).command(new CommandBuilder("mvn"))
+                    return new CommandBuilder("mvn")
                 }
             }
         }
