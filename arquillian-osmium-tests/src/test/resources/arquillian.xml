@@ -27,7 +27,7 @@
     <extension qualifier="webdriver">
         <!--<property name="browser">ios</property>-->
         <property name="remoteAddress">http://localhost:4444/wd/hub</property>
-        <property name="sdkVersion">8.0</property>
+        <property name="sdkVersion">8.1</property>
     </extension>
 
 </arquillian>

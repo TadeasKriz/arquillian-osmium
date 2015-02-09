@@ -25,6 +25,8 @@ import java.io.IOException;
 
 public class Deployments {
 
+    public static final String IOS_APP = "ios-app";
+
     public static Archive<?> playgroundIpa(OsmiumBuilder builder) throws IOException {
         return builder
                 .sourceDirectory("../arquillian-osmium-playground")
@@ -34,6 +36,7 @@ public class Deployments {
 
     public static Archive<?> playgroundApp(OsmiumBuilder builder) throws IOException {
         return builder.sourceDirectory("../arquillian-osmium-playground")
+                .targetSdkName("iphonesimulator")
                 .projectName("arquillian-osmium-playground")
                 .appArchive();
     }

@@ -119,14 +119,16 @@ public class IOSDeployableContainer implements DeployableContainer<IOSContainerC
     public ProtocolMetaData deploy(Archive<?> archive) throws DeploymentException {
         WorkingDirectory workingDirectory = this.workingDirectory.get();
         ProtocolMetaData metadata = new ProtocolMetaData();
-        File tempAppFile = new File(workingDirectory.getDeploymentDirectory().asFile(), archive.getName());
         boolean isSimulatorArchive = archive.getName().toLowerCase().endsWith(".app");
-
-        archive.as(ZipExporter.class).exportTo(tempAppFile, true);
+        File appOrIpaFile = new File(workingDirectory.getDeploymentDirectory().asFile(), archive.getName());
 
         if (!isSimulatorArchive) {
-            File unzippedIPA = archive.as(ExplodedExporter.class).exportExploded(tempAppFile.getParentFile(),
-                    tempAppFile.getName() + ".unzipped");
+
+
+            archive.as(ZipExporter.class).exportTo(appOrIpaFile, true);
+
+            File unzippedIPA = archive.as(ExplodedExporter.class).exportExploded(appOrIpaFile.getParentFile(),
+                    appOrIpaFile.getName() + ".unzipped");
 
             File appFile = FileHelper.findSingleFile(unzippedIPA, "\\.app$");
             File iosDeployZip = new File(workingDirectory.asFile(), "ios-deploy.zip");
@@ -142,20 +144,22 @@ public class IOSDeployableContainer implements DeployableContainer<IOSContainerC
             System.out.println("Downloaded and unzipped ios-deploy.");
 
             Tasks.prepare(CommandTool.class)
-                    .workingDir(iosDeployDirectory.getAbsolutePath())
+                    .workingDirectory(iosDeployDirectory)
                     .programName("make")
                     .parameters("ios-deploy")
                     .interaction(new ProcessInteractionBuilder().when(".*").printToOut().build())
                     .execute().await();
             Tasks.prepare(CommandTool.class)
-                    .workingDir(iosDeployDirectory.getAbsolutePath())
+                    .workingDirectory(iosDeployDirectory)
                     .programName("./ios-deploy")
                     .parameters("-r", "-b", appFile.getAbsolutePath())
                     .interaction(new ProcessInteractionBuilder().when(".*").printToOut().build())
                     .execute().await();
+        } else {
+            File unzippedIPA = archive.as(ExplodedExporter.class).exportExploded(appOrIpaFile.getParentFile());
         }
 
-        metadata.addContext(new IOSContainerContext(tempAppFile, isSimulatorArchive));
+        metadata.addContext(new IOSContainerContext(appOrIpaFile, isSimulatorArchive));
 
         return metadata;
     }

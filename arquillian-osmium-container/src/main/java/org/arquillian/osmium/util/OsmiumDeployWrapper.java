@@ -50,7 +50,7 @@ public class OsmiumDeployWrapper {
         LOGGER.log(Level.INFO, "Compiling `ios-deploy` from {0}.", iosDeployDirectory.getAbsolutePath());
 
         Tasks.prepare(CommandTool.class)
-                .workingDir(iosDeployDirectory.getAbsolutePath())
+                .workingDirectory(iosDeployDirectory)
                 .programName("make")
                 .parameters("ios-deploy")
                 .interaction(new ProcessInteractionBuilder().when(".*").printToOut().build())

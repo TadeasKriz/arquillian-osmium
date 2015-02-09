@@ -15,8 +15,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package arquillian.osmium.test;
+package arquillian.osmium.test.base;
 
+import arquillian.osmium.test.Deployments;
 import org.arquillian.osmium.IOSDriver;
 import org.arquillian.osmium.OsmiumResource;
 import org.arquillian.osmium.util.OsmiumBuilder;
@@ -47,19 +48,14 @@ import static org.junit.Assert.assertThat;
  */
 @RunWith(Arquillian.class)
 @RunAsClient
-public class IOSDeployableContainerTest {
+public abstract class IOSDeployableContainerTestBase {
 
     @OsmiumResource
     static OsmiumBuilder builder;
 
     @Drone
-    @OperateOnDeployment("ios-app")
+    @OperateOnDeployment(Deployments.IOS_APP)
     IOSDriver driver;
-
-    @Deployment(testable = false, name = "ios-app")
-    public static Archive<?> createDeployment() throws IOException {
-        return Deployments.playgroundIpa(builder);
-    }
 
     @After
     public void tearDown() throws Exception {
