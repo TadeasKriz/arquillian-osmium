@@ -19,6 +19,7 @@ package arquillian.osmium.test.util;
 public class TestUtils {
 
     public static boolean nativeTestsEnabled() {
+        // FIXME we should return false if there is no connected device instead
         return System.getenv("TRAVIS") != null;
     }
 

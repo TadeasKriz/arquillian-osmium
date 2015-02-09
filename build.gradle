@@ -9,7 +9,7 @@ import org.arquillian.spacelift.process.CommandBuilder
 defaultTasks 'assemble'
 
 ext {
-    defaultIOSDriverCommit = 'e41bc2470165c938a5ae2b20fcb75f53e126cfac'
+    defaultIOSDriverCommit = 'f9f728eda5f056d2bbbdfd987a45044b968c75b5'
     defaultDroneCommit = '34aca2c68647bd307668dc8bef704de71818edff'
 
     defaultDeveloperName = ''
