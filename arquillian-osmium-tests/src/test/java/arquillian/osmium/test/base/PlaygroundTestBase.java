@@ -48,20 +48,11 @@ import static org.junit.Assert.assertThat;
  */
 @RunWith(Arquillian.class)
 @RunAsClient
-public abstract class IOSDeployableContainerTestBase {
-
-    @OsmiumResource
-    static OsmiumBuilder builder;
+public abstract class PlaygroundTestBase {
 
     @Drone
     @OperateOnDeployment(Deployments.IOS_APP)
     IOSDriver driver;
-
-    @After
-    public void tearDown() throws Exception {
-        // end the test
-        //driver.quit();
-    }
 
     @Test
     public void testWebdriver() {
@@ -70,7 +61,13 @@ public abstract class IOSDeployableContainerTestBase {
         // find textField
         WebElement textField = driver.findElement(By.id("textField"));
         assertThat(textField, is(not(nullValue())));
-        textField.sendKeys("Hello Osmium");
+        textField.sendKeys("Hello QE camp!");
+
+        try {
+            Thread.sleep(5000);
+        } catch(InterruptedException e) {
+            // ...
+        }
 
         WebElement button = driver.findElement(By.id("button"));
         assertThat(button, is(not(nullValue())));
@@ -78,9 +75,15 @@ public abstract class IOSDeployableContainerTestBase {
 
         textField.clear();
 
+        try {
+            Thread.sleep(5000);
+        } catch(InterruptedException e) {
+            // ...
+        }
+
         WebElement switchElement = driver.findElement(By.id("switch"));
         switchElement.click();
-        textField.sendKeys("Bye Osmium\n");
+        textField.sendKeys("Bye QE camp!\n");
 
         File screenshot = driver.getScreenshotAs(OutputType.FILE);
 

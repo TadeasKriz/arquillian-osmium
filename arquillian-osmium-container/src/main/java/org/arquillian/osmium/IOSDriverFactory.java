@@ -33,11 +33,15 @@ import org.uiautomation.ios.IOSCapabilities;
 
 import java.net.URL;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class IOSDriverFactory implements
         Configurator<IOSDriver, WebDriverConfiguration>,
         Instantiator<IOSDriver, WebDriverConfiguration>,
         Destructor<IOSDriver> {
+
+    private static final Logger LOGGER = Logger.getLogger(IOSDriverFactory.class.getSimpleName());
 
     @Inject
     private Instance<DroneContext> droneContext;
@@ -83,15 +87,33 @@ public class IOSDriverFactory implements
         Map<String, ?> capabilityMap = capabilities.asMap();
 
         DronePointContext<WebDriver> pointContext = droneContext.get().get(dronePoint);
+        String bundleName = pointContext.getMetadata(BundleNameKey.class);
+        if (bundleName == null) {
+            LOGGER.log(Level.INFO, "There was no deployment bundle name specified, using `Safari` for safari tests.");
+            bundleName = "Safari";
+        }
 
-        System.out.println("Drone saved bundle name: " + pointContext.getMetadata(BundleNameKey.class));
-        IOSCapabilities iosCapabilities = IOSCapabilities.iphone(pointContext.getMetadata(BundleNameKey.class));
-        iosCapabilities.setCapability(IOSCapabilities.SIMULATOR, pointContext.getMetadata(UseSimulatorKey.class));
+        Boolean useSimulator = pointContext.getMetadata(UseSimulatorKey.class);
+        if (useSimulator == null) {
+            LOGGER.log(Level.INFO, "The deployment did not specify whether simulator or a device should be used. " +
+                    "Using preferred value from webdriver configuration.");
 
-        if(capabilityMap.containsKey(IOSCapabilities.UI_SDK_VERSION)) {
+            if (capabilityMap.containsKey(IOSCapabilities.SIMULATOR)) {
+                useSimulator = (Boolean) capabilityMap.get(IOSCapabilities.SIMULATOR);
+            } else {
+                LOGGER.log(Level.INFO, "Using simulator because it was not overridden in configuration with `" +
+                        IOSCapabilities.SIMULATOR + "`.");
+                useSimulator = true;
+            }
+        }
+
+        IOSCapabilities iosCapabilities = IOSCapabilities.iphone(bundleName);
+        iosCapabilities.setCapability(IOSCapabilities.SIMULATOR, useSimulator);
+
+        if (capabilityMap.containsKey(IOSCapabilities.UI_SDK_VERSION)) {
             iosCapabilities.setSDKVersion((String) capabilityMap.get(IOSCapabilities.UI_SDK_VERSION));
         }
-        if(capabilityMap.containsKey(IOSCapabilities.UUID)) {
+        if (capabilityMap.containsKey(IOSCapabilities.UUID)) {
             iosCapabilities.setDeviceUUID((String) capabilityMap.get(IOSCapabilities.UUID));
         }
         return new IOSDriverImpl(remoteAddress, iosCapabilities);
